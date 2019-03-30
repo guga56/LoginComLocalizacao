@@ -1,0 +1,39 @@
+create database projetophp;
+use projetophp;
+
+create table login(
+       idlogin           int         primary key,
+	   nome              varchar(50)   not null,
+	   usuario           varchar(50)   not null,
+	   senha             varchar(100)  not null);
+	   
+desc login;
+
+create table cliente(
+idcliente             int            primary key,
+nome                  varchar(50)     not null,
+email                 varchar(50)     not null,
+id_login              int             not null   unique,
+foreign key(id_login) references login(idlogin));
+
+
+create table endereco(
+idendereco            int            primary key,
+rua                   varchar(50)     not null,
+cidade                varchar(50)     not null,
+estado                varchar(50)     not null,
+id_cliente            int             not null   unique,
+foreign key(id_cliente) references cliente(idcliente));
+
+
+desc endereco;
+
+create table telefone(
+   idtelefone        int            primary key,
+   tipo              varchar(50)      not null,
+   numero            varchar(12)      not null,
+   id_cliente        int              not null,
+   foreign key(id_cliente) references cliente(idcliente)
+);
+
+desc telefone;
